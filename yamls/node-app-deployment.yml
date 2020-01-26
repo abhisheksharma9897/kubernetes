@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: node-js-app
+  name: node-js-app-deploy
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      run: node-js-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 5
+      maxUnavailable: 3
+  template:
+    metadata:
+      labels:
+        run: node-js-app
+    spec:
+      containers:
+      - image: 096002618444.dkr.ecr.ap-south-1.amazonaws.com/nodejs-test:latest
+        name: node-js-application
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "100M"
+          requests:
+            cpu: "100m"
+            memory: "100M"

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-app-port-service
+
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 3000
+      nodePort: 3000
+  selector:
+    run: node-js-app 
+
